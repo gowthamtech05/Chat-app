@@ -101,6 +101,8 @@ const loginUser = async (req, res) => {
 const logoutUser = async (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
+    secure: true,
+    sameSite: "none",
     expires: new Date(0),
   });
 
@@ -112,7 +114,7 @@ const logoutUser = async (req, res) => {
 const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("-password");
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
