@@ -8,3 +8,4 @@ const socket: Socket = io(SOCKET_URL, {
 });
 
 export default socket;
+
