@@ -26,12 +26,16 @@ const {
 
 const app = express();
 
-
 connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: "https://connectify-wpclone.vercel.app",
+    credentials: true,
+  }),
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -43,7 +47,10 @@ app.get("/", (req, res) => res.send("API Running"));
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: "http://localhost:5173", credentials: true },
+  cors: {
+    origin: "https://connectify-wpclone.vercel.app",
+    credentials: true,
+  },
 });
 
 const onlineUsers = new Map();
@@ -84,7 +91,6 @@ io.use((socket, next) => {
     next(new Error("Not authenticated"));
   }
 });
-
 
 async function syncPendingDeliveries(userId) {
   try {

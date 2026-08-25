@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/friends";
+const API_URL = "https://chat-app-gkzh.onrender.com/api/friends";
 
 export const sendFriendRequest = async (userId: string) => {
   const response = await axios.post(
